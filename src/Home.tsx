@@ -555,7 +555,7 @@ const Home = (props: HomeProps) => {
             <MainContainer>
                 <WalletContainer>
                     <Logo><a href="http://localhost:3000/" target="_blank" rel="noopener noreferrer"><img alt=""
-                                                                                                          src="enklu_emerald.png"/></a></Logo>
+                                                                                                          src="logo.png"/></a></Logo>
                     <Menu>
                         {/* <li><a href="http://localhost:3000/" target="_blank" rel="noopener noreferrer">Menu 1</a>
                         </li>
