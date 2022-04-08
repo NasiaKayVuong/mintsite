@@ -70,6 +70,13 @@ const ConnectButton = styled(WalletMultiButton)`
   margin: 0 auto;
 `;
 
+const MobileConnectButton = styled(WalletMultiButton)`
+  border-radius: 18px !important;
+  padding: 4px 12px;
+  background-color: #2DCCD3;
+  margin: 0 auto;
+`;
+
 const NFT = styled(Paper)`
   min-width: 500px;
   padding: 5px 20px 20px 20px;
@@ -127,6 +134,15 @@ const Logo = styled.div`
     height: 150px;
   }
 `;
+
+const MobileLogo = styled.div`
+  flex: 0 0 auto;
+
+  img {
+    height: 60px;
+  }
+`;
+
 const Menu = styled.ul`
   list-style: none;
   display: inline-flex;
@@ -197,6 +213,27 @@ const MintContainer = styled.div`
   justify-content: flex-end
 `;
 
+const MobileMintContainer = styled.div`
+  display: flex;
+  border-style: none;
+  flex-direction: row;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center
+`;
+
+const MobileImageContainer = styled.div`
+  display: flex;
+  border-style: none;
+  flex-direction: row;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center
+`;
+
+
 const DesContainer = styled.div`
 z-index: 1;
 position: absolute;
@@ -214,8 +251,15 @@ const Price = styled(Chip)`
   font-family: 'Cairo', sans-serif;
 `;
 
+const MobilePrice = styled(Chip)`
+  margin: auto;
+  font-weight: bold;
+  font-size: 1em !important;
+  font-family: 'Cairo', sans-serif;
+`;
+
 const Image = styled.img`
-  height: 400px;
+  height: 350px;
   width: auto;
   border-radius: 7px;
   box-shadow: 5px 5px 40px 5px rgba(0,0,0,0.5);
@@ -302,6 +346,8 @@ const Home = (props: HomeProps) => {
         message: "",
         severity: undefined,
     });
+
+    let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     const wallet = useAnchorWallet();
     const [candyMachine, setCandyMachine] = useState<CandyMachine>();
@@ -554,8 +600,13 @@ const Home = (props: HomeProps) => {
         <main>
             <MainContainer>
                 <WalletContainer>
+                    { isMobile ?
+                    <MobileLogo><a href="http://localhost:3000/" target="_blank" rel="noopener noreferrer"><img alt=""
+                    src="logo.png"/></a></MobileLogo>
+                    :                    
                     <Logo><a href="http://localhost:3000/" target="_blank" rel="noopener noreferrer"><img alt=""
                                                                                                           src="logo.png"/></a></Logo>
+                    }
                     <Menu>
                         {/* <li><a href="http://localhost:3000/" target="_blank" rel="noopener noreferrer">Menu 1</a>
                         </li>
@@ -564,50 +615,130 @@ const Home = (props: HomeProps) => {
                         <li><a href="http://localhost:3000/" target="_blank"
                                rel="noopener noreferrer">Menu 3</a></li> */}
                     </Menu>
+                    {isMobile ?
+                        <Wallet>
+                            {wallet ?
+                                 <WalletAmount>{(balance || 0).toLocaleString()} SOL<ConnectButton/></WalletAmount> :
+                                 <MobileConnectButton>Connect Wallet</MobileConnectButton>}
+                         </Wallet>
+                    :
                     <Wallet>
                         {wallet ?
                             <WalletAmount>{(balance || 0).toLocaleString()} SOL<ConnectButton/></WalletAmount> :
                             <ConnectButton>Connect Wallet</ConnectButton>}
                     </Wallet>
+                    }
                 </WalletContainer>
+                { isMobile ? null
+                :
                 <ShimmerTitle>Loading your Verse!</ShimmerTitle>
+                }
                 <br/>
+                {isMobile ? 
+                <MobileImageContainer>
+                    <Image
+                                src="hololotusmobile.gif"
+                                alt="NFT To Mint"/>
+                </MobileImageContainer>
+                :
                 <div>
                         <iframe width="853" height="480" src='https://cloud.enklu.com/#/app/?app=62d13c3c-0454-4876-95aa-9f23260acf65' frameBorder="0" allowFullScreen title="Embedded Experience"/>
-                        </div>
+                </div>
+                }
+                {isMobile ?
+                <MobileMintContainer>
+                <DesContainer>
+                    <NFT elevation={3}>
+                        <h3>Mint Your NFT</h3>
+                        <br/>
+                        <div>
+                            <MobilePrice
+                            label={isActive && whitelistEnabled && (whitelistTokenBalance > 0) ? (whitelistPrice + " " + priceLabel) : (price + " " + priceLabel)}/>
+                        
+                            </div>
+                        <br/>
+                        {wallet && isActive && whitelistEnabled && (whitelistTokenBalance > 0) && isBurnToken &&
+                          <h3>You own {whitelistTokenBalance} WL mint {whitelistTokenBalance > 1 ? "tokens" : "token" }.</h3>}
+                        {wallet && isActive && whitelistEnabled && (whitelistTokenBalance > 0) && !isBurnToken &&
+                          <h3>You are whitelisted and allowed to mint.</h3>}
+
+                        {wallet && isActive && endDate && Date.now() < endDate.getTime() &&
+                          <Countdown
+                            date={toDate(candyMachine?.state?.endSettings?.number)}
+                            onMount={({completed}) => completed && setIsEnded(true)}
+                            onComplete={() => {
+                                setIsEnded(true);
+                            }}
+                            renderer={renderEndDateCounter}
+                          />}
+                        {wallet && isActive &&
+                          <h3>TOTAL MINTED : {itemsRedeemed} / {itemsAvailable}</h3>}
+                        {wallet && isActive && <BorderLinearProgress variant="determinate"
+                                                                     value={100 - (itemsRemaining * 100 / itemsAvailable)}/>}
+                        <br/>
+                        <MintButtonContainer>
+                            {!isActive && !isEnded && candyMachine?.state.goLiveDate && (!isWLOnly || whitelistTokenBalance > 0) ? (
+                                <Countdown
+                                    date={toDate(candyMachine?.state.goLiveDate)}
+                                    onMount={({completed}) => completed && setIsActive(!isEnded)}
+                                    onComplete={() => {
+                                        setIsActive(!isEnded);
+                                    }}
+                                    renderer={renderGoLiveDateCounter}
+                                />) : (
+                                !wallet ? (
+                                        <MobileConnectButton>Connect Wallet</MobileConnectButton>
+                                    ) : (!isWLOnly || whitelistTokenBalance > 0) ?
+                                    candyMachine?.state.gatekeeper &&
+                                    wallet.publicKey &&
+                                    wallet.signTransaction ? (
+                                        <GatewayProvider
+                                            wallet={{
+                                                publicKey:
+                                                    wallet.publicKey ||
+                                                    new PublicKey(CANDY_MACHINE_PROGRAM),
+                                                //@ts-ignore
+                                                signTransaction: wallet.signTransaction,
+                                            }}
+                                            // // Replace with following when added
+                                            // gatekeeperNetwork={candyMachine.state.gatekeeper_network}
+                                            gatekeeperNetwork={
+                                                candyMachine?.state?.gatekeeper?.gatekeeperNetwork
+                                            } // This is the ignite (captcha) network
+                                            /// Don't need this for mainnet
+                                            clusterUrl={rpcUrl}
+                                            options={{autoShowModal: false}}
+                                        >
+                                            <MintButton
+                                                candyMachine={candyMachine}
+                                                isMinting={isMinting}
+                                                isActive={isActive}
+                                                isEnded={isEnded}
+                                                isSoldOut={isSoldOut}
+                                                onMint={onMint}
+                                            />
+                                        </GatewayProvider>
+                                    ) : (
+                                        <MintButton
+                                            candyMachine={candyMachine}
+                                            isMinting={isMinting}
+                                            isActive={isActive}
+                                            isEnded={isEnded}
+                                            isSoldOut={isSoldOut}
+                                            onMint={onMint}
+                                        />
+                                    ) :
+                                    <h1>Mint is private.</h1>
+                                    )}
+                        </MintButtonContainer>
+                        <br/>
+                        {wallet && isActive && solanaExplorerLink &&
+                          <SolExplorerLink href={solanaExplorerLink} target="_blank">View on Solscan</SolExplorerLink>}
+                    </NFT>
+                </DesContainer>
+            </MobileMintContainer>
+                :
                 <MintContainer>
-                    {/* <DesContainer> */}
-                        {/* <Des elevation={2}>
-                            <LogoAligner><img src="logo.png" alt=""></img><GoldTitle>TITLE 1</GoldTitle></LogoAligner>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt.</p>
-                        </Des>
-                        <Des elevation={2}>
-                            <LogoAligner><img src="logo.png" alt=""></img><GoldTitle>TITLE 2</GoldTitle></LogoAligner>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt.</p>
-                        </Des>
-                        <Des elevation={2}>
-                            <LogoAligner><img src="logo.png" alt=""></img><GoldTitle>TITLE 3</GoldTitle></LogoAligner>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt.</p>
-                        </Des> */}
-                        {/* <div>
-                        <iframe width="853" height="480" src='https://cloud.enklu.com/#/app/?app=62d13c3c-0454-4876-95aa-9f23260acf65' frameBorder="0" allowFullScreen title="Embedded Experience"/>
-                        </div> */}
-                    {/* </DesContainer> */}
                     <DesContainer>
                         <NFT elevation={3}>
                             <h2>Mint Your NFT</h2>
@@ -698,6 +829,7 @@ const Home = (props: HomeProps) => {
                         </NFT>
                     </DesContainer>
                 </MintContainer>
+                }   
             </MainContainer>
             <Snackbar
                 open={alertState.open}
