@@ -570,7 +570,7 @@ const Home = (props: HomeProps) => {
                             <ConnectButton>Connect Wallet</ConnectButton>}
                     </Wallet>
                 </WalletContainer>
-                <ShimmerTitle>MINT IS LIVE !</ShimmerTitle>
+                <ShimmerTitle>Loading your Verse!</ShimmerTitle>
                 <br/>
                 <div>
                         <iframe width="853" height="480" src='https://cloud.enklu.com/#/app/?app=62d13c3c-0454-4876-95aa-9f23260acf65' frameBorder="0" allowFullScreen title="Embedded Experience"/>
