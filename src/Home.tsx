@@ -24,7 +24,8 @@ const decimals = process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS ? +process.env
 const splTokenName = process.env.REACT_APP_SPL_TOKEN_TO_MINT_NAME ? process.env.REACT_APP_SPL_TOKEN_TO_MINT_NAME.toString() : "TOKEN";
 
 const WalletContainer = styled.div`
-z-index: 1;
+  z-index: 1;
+  width: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -79,6 +80,7 @@ const MobileConnectButton = styled(WalletMultiButton)`
 
 const NFT = styled(Paper)`
   min-width: 500px;
+  max-width: auto;
   padding: 5px 20px 20px 20px;
   flex: 1 1 auto;
   background-color: var(--card-background-color) !important;
@@ -215,6 +217,7 @@ const MintContainer = styled.div`
 
 const MobileMintContainer = styled.div`
   display: flex;
+  width: auto;
   border-style: none;
   flex-direction: row;
   flex: 1 1 auto;
@@ -225,6 +228,7 @@ const MobileMintContainer = styled.div`
 
 const MobileImageContainer = styled.div`
   display: flex;
+  width: auto;
   border-style: none;
   flex-direction: row;
   flex: 1 1 auto;
@@ -235,8 +239,8 @@ const MobileImageContainer = styled.div`
 
 
 const DesContainer = styled.div`
-z-index: 1;
-position: absolute;
+  z-index: 1;
+  position: absolute;
   display: flex;
   border-style: none;
   flex-direction: column;
@@ -601,10 +605,10 @@ const Home = (props: HomeProps) => {
             <MainContainer>
                 <WalletContainer>
                     { isMobile ?
-                    <MobileLogo><a href="http://localhost:3000/" target="_blank" rel="noopener noreferrer"><img alt=""
+                    <MobileLogo><a href="https://versenftcryptoart.com/" target="_blank" rel="noopener noreferrer"><img alt=""
                     src="logo.png"/></a></MobileLogo>
                     :                    
-                    <Logo><a href="http://localhost:3000/" target="_blank" rel="noopener noreferrer"><img alt=""
+                    <Logo><a href="https://versenftcryptoart.com/" target="_blank" rel="noopener noreferrer"><img alt=""
                                                                                                           src="logo.png"/></a></Logo>
                     }
                     <Menu>
