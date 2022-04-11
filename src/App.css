@@ -11,7 +11,7 @@ body {
   background-color: var(--main-background-color);
   /*background: url("img/background.png");
   background-size: cover;*/
-
+  position: relative;
   font-family: 'Cairo', sans-serif;
   font-size: 1.1em;
   overflow-x: hidden;

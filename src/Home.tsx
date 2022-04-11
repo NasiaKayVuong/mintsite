@@ -91,6 +91,7 @@ const NFT = styled(Paper)`
   flex: 1 1 auto;
   background-color: var(--card-background-color) !important;
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) !important;
+  justify-content: center;
 `;
 
 const Des = styled(NFT)`
@@ -200,13 +201,13 @@ const SolExplorerLink = styled.a`
   }
 `;
 
-// Removed   margin-right: 4%; margin-left: 4%;
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 20px;
   margin-bottom: 20px;
-
+  margin-right: 4%;
+  margin-left: 4%;
   text-align: center;
   justify-content: center;
 `;
@@ -234,7 +235,7 @@ const MobileMintContainer = styled.div`
 
 const MobileImageContainer = styled.div`
   display: flex;
-  width: auto;
+  width: 100;
   border-style: none;
   flex-direction: row;
   flex: 1 1 auto;
@@ -246,6 +247,7 @@ const MobileImageContainer = styled.div`
 
 const DesContainer = styled.div`
   z-index: 1;
+  width: auto;
   position: absolute;
   display: flex;
   border-style: none;
@@ -269,15 +271,15 @@ const MobilePrice = styled(Chip)`
 `;
 
 const Image = styled.img`
-  height: 340px;
-  width: auto;
+  height: 310px;
+  max-width: 100%;
 
 `;
 
 const BorderLinearProgress = styled(LinearProgress)`
   margin: 20px;
   height: 10px !important;
-  max-width: 720px;
+  max-width: 600px;
   border-radius: 30px;
   border: 2px solid white;
   box-shadow: 5px 5px 40px 5px rgba(0,0,0,0.5);
