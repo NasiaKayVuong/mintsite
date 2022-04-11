@@ -60,7 +60,13 @@ const WalletAmount = styled.div`
 
 const Wallet = styled.ul`
   flex: 0 0 auto;
-  margin: 0;
+  margin: 2%;
+  padding: 0;
+`;
+
+const MobileWallet = styled.ul`
+  flex: 0 0 auto;
+  margin: 2%;
   padding: 0;
 `;
 
@@ -194,13 +200,13 @@ const SolExplorerLink = styled.a`
   }
 `;
 
+// Removed   margin-right: 4%; margin-left: 4%;
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 20px;
   margin-bottom: 20px;
-  margin-right: 4%;
-  margin-left: 4%;
+
   text-align: center;
   justify-content: center;
 `;
@@ -263,15 +269,15 @@ const MobilePrice = styled(Chip)`
 `;
 
 const Image = styled.img`
-  height: 350px;
+  height: 340px;
   width: auto;
-  border-radius: 7px;
-  box-shadow: 5px 5px 40px 5px rgba(0,0,0,0.5);
+
 `;
 
 const BorderLinearProgress = styled(LinearProgress)`
   margin: 20px;
   height: 10px !important;
+  max-width: 720px;
   border-radius: 30px;
   border: 2px solid white;
   box-shadow: 5px 5px 40px 5px rgba(0,0,0,0.5);
@@ -620,11 +626,11 @@ const Home = (props: HomeProps) => {
                                rel="noopener noreferrer">Menu 3</a></li> */}
                     </Menu>
                     {isMobile ?
-                        <Wallet>
+                        <MobileWallet>
                             {wallet ?
                                  <WalletAmount>{(balance || 0).toLocaleString()} SOL<ConnectButton/></WalletAmount> :
                                  <MobileConnectButton>Connect Wallet</MobileConnectButton>}
-                         </Wallet>
+                         </MobileWallet>
                     :
                     <Wallet>
                         {wallet ?
