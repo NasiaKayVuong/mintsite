@@ -14,8 +14,6 @@ body {
   position: relative;
   font-family: 'Cairo', sans-serif;
   font-size: 1.1em;
-  overflow-x: hidden;
-  width: 100%;
 }
 
 h2,

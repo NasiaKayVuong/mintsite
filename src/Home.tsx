@@ -85,8 +85,8 @@ const MobileConnectButton = styled(WalletMultiButton)`
 `;
 
 const NFT = styled(Paper)`
-  min-width: 500px;
-  max-width: auto;
+  min-width: 340px;
+  max-width: 100%;
   padding: 5px 20px 20px 20px;
   flex: 1 1 auto;
   background-color: var(--card-background-color) !important;
@@ -203,6 +203,7 @@ const SolExplorerLink = styled.a`
 
 const MainContainer = styled.div`
   display: flex;
+  width: auto;
   flex-direction: column;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -224,7 +225,8 @@ const MintContainer = styled.div`
 
 const MobileMintContainer = styled.div`
   display: flex;
-  width: auto;
+  max-width: 100%;
+  min-width: 340px;
   border-style: none;
   flex-direction: row;
   flex: 1 1 auto;
@@ -235,7 +237,7 @@ const MobileMintContainer = styled.div`
 
 const MobileImageContainer = styled.div`
   display: flex;
-  width: 100;
+  max-width: 100%;
   border-style: none;
   flex-direction: row;
   flex: 1 1 auto;
@@ -247,7 +249,7 @@ const MobileImageContainer = styled.div`
 
 const DesContainer = styled.div`
   z-index: 1;
-  width: auto;
+  max-width: 100%;
   position: absolute;
   display: flex;
   border-style: none;
@@ -271,19 +273,20 @@ const MobilePrice = styled(Chip)`
 `;
 
 const Image = styled.img`
-  height: 310px;
-  max-width: 100%;
+  height: 340px;
+  width: auto;
 
 `;
 
 const BorderLinearProgress = styled(LinearProgress)`
   margin: 20px;
   height: 10px !important;
-  max-width: 600px;
+  max-width: 100%;
   border-radius: 30px;
   border: 2px solid white;
   box-shadow: 5px 5px 40px 5px rgba(0,0,0,0.5);
   background-color:var(--main-text-color) !important;
+  justify-content: center;
   
   > div.MuiLinearProgress-barColorPrimary{
     background-color:var(--title-text-color) !important;
