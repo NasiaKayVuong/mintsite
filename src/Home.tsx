@@ -236,21 +236,30 @@ const MobileMintContainer = styled.div`
 `;
 
 const MobileImageContainer = styled.div`
-  display: flex;
-  max-width: 100%;
-  border-style: none;
-  flex-direction: row;
-  flex: 1 1 auto;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center
+max-width: auto;
+position: relative;
+display: flex;
+border-style: none;
+flex-direction: column;
+flex: 1 1 auto;
+gap: 20px;
 `;
 
 
 const DesContainer = styled.div`
   z-index: 1;
-  max-width: 100%;
+  max-width: auto;
   position: absolute;
+  display: flex;
+  border-style: none;
+  flex-direction: column;
+  flex: 1 1 auto;
+  gap: 20px;
+`;
+
+const MobileDesContainer = styled.div`
+  max-width: auto;
+  position: relative;
   display: flex;
   border-style: none;
   flex-direction: column;
@@ -662,7 +671,7 @@ const Home = (props: HomeProps) => {
                 }
                 {isMobile ?
                 <MobileMintContainer>
-                <DesContainer>
+                <MobileDesContainer>
                     <NFT elevation={3}>
                         <h3>Mint Your NFT</h3>
                         <br/>
@@ -750,7 +759,7 @@ const Home = (props: HomeProps) => {
                         {wallet && isActive && solanaExplorerLink &&
                           <SolExplorerLink href={solanaExplorerLink} target="_blank">View on Solscan</SolExplorerLink>}
                     </NFT>
-                </DesContainer>
+                </MobileDesContainer>
             </MobileMintContainer>
                 :
                 <MintContainer>
