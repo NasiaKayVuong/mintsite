@@ -674,7 +674,7 @@ const Home = (props: HomeProps) => {
                 <MobileDesContainer>
                     <NFT elevation={3}>
                         <h3>Mint Your NFT</h3>
-                        <br/>
+                        
                         <div>
                             <MobilePrice
                             label={isActive && whitelistEnabled && (whitelistTokenBalance > 0) ? (whitelistPrice + " " + priceLabel) : (price + " " + priceLabel)}/>
@@ -699,7 +699,7 @@ const Home = (props: HomeProps) => {
                           <h3>TOTAL MINTED : {itemsRedeemed} / {itemsAvailable}</h3>}
                         {wallet && isActive && <BorderLinearProgress variant="determinate"
                                                                      value={100 - (itemsRemaining * 100 / itemsAvailable)}/>}
-                        <br/>
+                        
                         <MintButtonContainer>
                             {!isActive && !isEnded && candyMachine?.state.goLiveDate && (!isWLOnly || whitelistTokenBalance > 0) ? (
                                 <Countdown
