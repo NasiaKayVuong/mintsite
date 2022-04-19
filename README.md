@@ -31,7 +31,7 @@ For instructions on how to set up a V2 candy machine, please refer to Metaplex's
 #### 1. Fork the project & clone it. Example:
 
 ```
-git clone https://github.com/Fulgurus/candy-machine-v2-responsive-ui.git
+git clone https://github.com/NasiaVuong/enklumint.git
 ```
 
 #### 2. Define your environment variables (.env file)
@@ -111,7 +111,6 @@ Next to that, make sure to update background image by overwriting your own backg
 
 ##### 4.2 `public` folder :
 
-- Update existing demo cool cats images (cool-cats.gif, logo.png) with your owns images in project `public` folder. Make sure to name them identically.
 - Add your custom website title in `index.html` : `<title>Mint Page</title>`
 
 ##### 4.3 `Home.tsx` :
@@ -156,10 +155,4 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Need Help ?
 
-You can contact me directly on Discord : BloodSpilll#9625
-
-## To thank me with a small SOL tip :]
-
-`58SevvhmaN4SfCop2HkepAWyM5zykr7Afiv91PAAfPqR`
